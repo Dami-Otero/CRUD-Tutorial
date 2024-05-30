@@ -4,7 +4,7 @@ export interface ApiResponse<T> {
 }
 
 export interface IEmployee {
-  _id?: string;
+  id?: string;
   name: string;
   email: string;
   mobile: string;
