@@ -1,9 +1,9 @@
 export interface ApiResponse<T> {
   message?: string;
-  data: T;
+  data: T; //holds data from api
 }
 
-export interface IEmployee {
+export interface IEmployee { //represents the employee object and its structure
   id?: string;
   name: string;
   email: string;

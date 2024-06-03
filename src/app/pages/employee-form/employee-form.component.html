@@ -1,6 +1,7 @@
 <h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-white ">Employee Details</h5>
 <form [formGroup]="employeeForm" class="w-full" (ngSubmit)="onSubmit()" novalidate>
   <div class="mb-5">
+    <!-- Forms group for name along with the rest of the variables later -->
     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
     <input type="text" id="name" class="form-control" placeholder="Name" formControlName="name">
     @if (employeeForm.get('name')?.hasError('required') && employeeForm.get('name')?.touched) {
@@ -29,8 +30,10 @@
     <label for="doj" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date of Joining</label>
     <input type="date" id="doj" class="form-control" placeholder="" formControlName="doj">
   </div>
+  <!-- Submit button -->
   <button type="submit"
     class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+    <!-- Cancel button -->
   <button type="button" (click)="onClose()"
     class="text-white  ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Cancel</button>
 </form>

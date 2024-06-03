@@ -9,10 +9,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './model.component.scss',
 })
 export class ModelComponent {
-  @Input() isOpen = false;
-  @Output() closeModel = new EventEmitter();
+  @Input() isOpen = false; //controls when model is open or closed
+  @Output() closeModel = new EventEmitter(); //notifies when model should be closed
 
   onCloseModel() {
-    this.closeModel.emit(false);
+    this.closeModel.emit(false); //false means model should be closed
   }
 }
