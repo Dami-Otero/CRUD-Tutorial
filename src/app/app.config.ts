@@ -10,5 +10,8 @@ import {HttpClientModule} from '@angular/common/http'
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), importProvidersFrom(HttpClientModule), provideToastr(), provideAnimations()]
+  providers: [provideRouter(routes), //configure router with applications routes
+    importProvidersFrom(HttpClientModule), //allows http requests
+    provideToastr(), 
+    provideAnimations()]
 };

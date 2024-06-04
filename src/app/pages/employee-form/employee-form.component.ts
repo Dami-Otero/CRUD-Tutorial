@@ -29,7 +29,7 @@ export class EmployeeFormComponent implements OnChanges {
 
   } 
   
-  ngOnChanges(): void {
+  ngOnChanges(): void { //used to recieve data when edited
     if (this.data) {
       //organizes data if not null
       this.employeeForm.patchValue({
@@ -44,7 +44,7 @@ export class EmployeeFormComponent implements OnChanges {
   onClose() { //closes form
     this.onCloseModel.emit(false);
   }
-  onSubmit(){ //for form submission
+  onSubmit(){ //for form submission and submit button
     if (this.employeeForm.valid) {
 
       if (this.data){ //updates the employee if the data exists

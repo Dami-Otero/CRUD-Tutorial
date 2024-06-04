@@ -14,7 +14,7 @@ import { IEmployee } from '../shared/models/Employee';
 export class EmployeeComponent implements OnInit{
   isModelOpen = false;
   employees: IEmployee[] = []; //array that holds list of employees
-  employee!: IEmployee; //for one employees data
+  employee!: IEmployee; //for one employees data, null by default
 constructor(private employeeService: EmployeeService, private toastService: ToastrService){}
 
 //basic function that initializes componrnt
@@ -44,7 +44,7 @@ deleteEmployee(id: string){ //method for deleting employees
   })
 }
 
-loadEmployee(data: IEmployee){ //loads employee data onto the form
+loadEmployee(data: IEmployee){ //loads employee data onto the form, used for edit feature
   this.employee = data;
   this.openModel();
 }
@@ -54,6 +54,6 @@ loadEmployee(data: IEmployee){ //loads employee data onto the form
 
   closeModel() {
     this.isModelOpen = false; //hides model
-    this.getAllEmployee()
+    this.getAllEmployee() //updates employee information
   }
 }

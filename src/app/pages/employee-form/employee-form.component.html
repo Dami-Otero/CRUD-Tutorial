@@ -4,7 +4,8 @@
     <!-- Forms group for name along with the rest of the variables later -->
     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
     <input type="text" id="name" class="form-control" placeholder="Name" formControlName="name">
-    @if (employeeForm.get('name')?.hasError('required') && employeeForm.get('name')?.touched) {
+        <!-- When data is not filled out, gives required message -->
+    @if (employeeForm.get('name')?.hasError('required') && employeeForm.get('name')?.touched) { 
     <div class="form-error">Name is required</div>
     }
   </div>
