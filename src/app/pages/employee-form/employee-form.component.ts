@@ -16,6 +16,7 @@ export class EmployeeFormComponent implements OnChanges {
   @Output() onCloseModel = new EventEmitter(); //notifies component about closure
   employeeForm: FormGroup; //used to manage the form
 
+  //constructor method always gets called when an instance is created
   constructor(private fb: FormBuilder, private employeeService: EmployeeService, private toastService: ToastrService) {
     this.employeeForm = this.fb.group({ 
       //required validators to create the form group
@@ -50,7 +51,7 @@ export class EmployeeFormComponent implements OnChanges {
       if (this.data){ //updates the employee if the data exists
         this.employeeService.updateEmployee(this.data.id as string, this.employeeForm.value).subscribe({next:(response)=>
           {
-            this.toastService.success(response.message);
+            this.toastService.success(response.message); //toast used to display messages to user
             this.onClose();
             
           }

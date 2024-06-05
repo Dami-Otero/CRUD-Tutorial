@@ -37,7 +37,7 @@ getAllEmployee(){ //method to get employees
 deleteEmployee(id: string){ //method for deleting employees
 
   this.employeeService.deleteEmployee(id).subscribe({
-    next: (response) => {
+    next: (response) => { //executed call back function for response
       this.toastService.success(response.message)
       this.getAllEmployee()
     }
