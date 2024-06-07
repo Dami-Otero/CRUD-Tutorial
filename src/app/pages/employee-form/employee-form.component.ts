@@ -24,8 +24,8 @@ export class EmployeeFormComponent implements OnChanges {
       email: new FormControl('', [Validators.required, Validators.email]),
       mobile: new FormControl('', [Validators.required]),
       dob: new FormControl('', [Validators.required]),
-      doj: new FormControl('', [Validators.required])
-
+      doj: new FormControl('', [Validators.required]),
+      salary: [0, [Validators.required, Validators.min(0)]] 
     })
 
   } 

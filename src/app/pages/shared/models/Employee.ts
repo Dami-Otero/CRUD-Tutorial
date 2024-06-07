@@ -10,4 +10,5 @@ export interface IEmployee { //represents the employee object and its structure
   mobile: string;
   dob: string;
   doj: string;
+  salary: number;
 }

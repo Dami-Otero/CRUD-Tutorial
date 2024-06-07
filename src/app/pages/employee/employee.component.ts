@@ -4,10 +4,11 @@ import { EmployeeFormComponent } from '../employee-form/employee-form.component'
 import { ToastrService } from 'ngx-toastr';
 import { EmployeeService } from '../../services/employee.service';
 import { IEmployee } from '../shared/models/Employee';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [ModelComponent, EmployeeFormComponent],
+  imports: [ModelComponent, EmployeeFormComponent, CommonModule],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss',
 })
@@ -55,5 +56,9 @@ loadEmployee(data: IEmployee){ //loads employee data onto the form, used for edi
   closeModel() {
     this.isModelOpen = false; //hides model
     this.getAllEmployee() //updates employee information
+  }
+
+  getTotalSalary(){
+    return this.employees.reduce((total, employee) => total+employee.salary, 0)
   }
 }

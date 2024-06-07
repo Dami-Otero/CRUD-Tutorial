@@ -25,7 +25,7 @@ export class EmployeeService {
   }
 
   updateEmployee(id: string, employee: IEmployee): Observable<ApiResponse<IEmployee>> { //updates employee
-    return this.http.put<ApiResponse<IEmployee>>(`${this.api}/${id}`, employee);
+    return this.http.post<ApiResponse<IEmployee>>(`${this.api}/${id}`, employee);
   }
   
   deleteEmployee(id: string): Observable<ApiResponse<IEmployee>> { //deletes employee
