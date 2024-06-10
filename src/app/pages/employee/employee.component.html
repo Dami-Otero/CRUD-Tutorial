@@ -73,5 +73,5 @@
 
 
 <app-model [isOpen]="isModelOpen" (closeModel)="closeModel()">
-  <app-employee-form (onCloseModel)="closeModel()" [data]="employee"></app-employee-form>
+  <app-employee-form (onCloseModel)="closeModel()" [isEditMode]="isEditMode" [data]="employee"></app-employee-form>
 </app-model>

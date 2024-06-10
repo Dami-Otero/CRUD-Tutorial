@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class EmployeeFormComponent implements OnChanges {
 
   @Input() data: IEmployee | null=null; //input property to recive employee data
+  @Input() isEditMode: boolean=false; //shows if its in edit mode
   @Output() onCloseModel = new EventEmitter(); //notifies component about closure
   employeeForm: FormGroup; //used to manage the form
 
@@ -31,21 +32,34 @@ export class EmployeeFormComponent implements OnChanges {
   } 
   
   ngOnChanges(): void { //used to recieve data when edited
-    if (this.data) {
-      //organizes data if not null
+    if (this.isEditMode && this.data) {
+      //organizes data if in edit mode and not null
       this.employeeForm.patchValue({
         name: this.data?.name,
         email: this.data?.email,
         mobile: this.data?.mobile,
         dob: this.data?.dob,
         doj: this.data?.doj,
+        salary: this.data?.salary
     })
   }
-  else if (!this.data)
+  else if (!this.isEditMode) //form resets if its not in edit mode
   {
-    this.employeeForm.reset();
+    this.resetForm();
   }
 }
+
+  resetForm(){
+    this.employeeForm.reset({
+      name:'',
+      email:'',
+      mobile:'',
+      dob:'',
+      doj:'',
+      salary: 0
+    })
+  }
+
   onClose() { //closes form
     this.onCloseModel.emit(false);
   }

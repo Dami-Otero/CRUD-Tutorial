@@ -14,8 +14,9 @@ import { CommonModule } from '@angular/common';
 })
 export class EmployeeComponent implements OnInit{
   isModelOpen = false;
+  isEditMode = false;
   employees: IEmployee[] = []; //array that holds list of employees
-  employee!: IEmployee; //for one employees data, null by default
+  employee: IEmployee | null = null; //for one employees data, | null = null allows employee to be null
 constructor(private employeeService: EmployeeService, private toastService: ToastrService){}
 
 //basic function that initializes componrnt
@@ -47,18 +48,22 @@ deleteEmployee(id: string){ //method for deleting employees
 
 loadEmployee(data: IEmployee){ //loads employee data onto the form, used for edit feature
   this.employee = data;
+  this.isEditMode=true;
   this.openModel();
 }
   openModel() {
-    if (!this.employee || !this.employee.id)
+    if (!this.employee)
     {
-      this.employee = {} as IEmployee; //only resets all the data when the employee is null and should be clear
+      this.employee = null; //makes employee null when adding new employee
+    } 
+      this.isModelOpen = true; //true so the model is displayed
     }
-    this.isModelOpen = true; //true so the model is displayed
-  }
+    
+  
 
   closeModel() {
     this.isModelOpen = false; //hides model
+    this.isEditMode = false; //resets edit mode
     this.getAllEmployee() //updates employee information
   }
 
