@@ -2,7 +2,7 @@
   <h4 class="font-bold text-2xl"></h4>
   <button type="button" (click)="openModel()"
     class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-full px-6 py-3 text-center mb-2 ">
-    Add New Employee</button>
+    Add New Employee</button> <!-- changed to add new employee-->
 </div>
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
   <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -26,7 +26,7 @@
           DOB
         </th>
         <th scope="col" class="px-6 py-3">
-          Salary
+          Salary <!--adds salary to employee details-->
         </th>
         <th scope="col" class="px-6 py-3">
           <span class="sr-only">Edit</span>
@@ -50,7 +50,7 @@
             {{item.dob}}
           </td>
           <td class="px-6 py-4">
-            {{item.salary | currency }}
+            {{item.salary | currency }} <!-- adds salary for specific employee, utilizing currency pipe-->
           </td>
           <td class="px-6 py-4 text-right">
             <button type="button" (click)="loadEmployee(item)" 
@@ -61,6 +61,7 @@
         </tr>
       }
     </tbody>
+    <!-- adds total salary using currency pipe at the bottom-->
       <tfoot>
         <tr>
           <td colspan = "4" class="text-right font-bold">Total Salary</td>

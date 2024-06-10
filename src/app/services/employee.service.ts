@@ -21,11 +21,11 @@ export class EmployeeService {
   }
 
   createEmployee(employee: IEmployee): Observable<ApiResponse<IEmployee>> { //creates new employee
-    return this.http.post<ApiResponse<IEmployee>>(`${this.api}`, employee);
+    return this.http.put<ApiResponse<IEmployee>>(`${this.api}`, employee); //put function since it should replace the resource completely
   }
 
   updateEmployee(id: string, employee: IEmployee): Observable<ApiResponse<IEmployee>> { //updates employee
-    return this.http.post<ApiResponse<IEmployee>>(`${this.api}/${id}`, employee);
+    return this.http.patch<ApiResponse<IEmployee>>(`${this.api}/${id}`, employee);//patch since only parts should be replaced
   }
   
   deleteEmployee(id: string): Observable<ApiResponse<IEmployee>> { //deletes employee

@@ -50,6 +50,10 @@ loadEmployee(data: IEmployee){ //loads employee data onto the form, used for edi
   this.openModel();
 }
   openModel() {
+    if (!this.employee || !this.employee.id)
+    {
+      this.employee = {} as IEmployee; //only resets all the data when the employee is null and should be clear
+    }
     this.isModelOpen = true; //true so the model is displayed
   }
 
@@ -58,6 +62,7 @@ loadEmployee(data: IEmployee){ //loads employee data onto the form, used for edi
     this.getAllEmployee() //updates employee information
   }
 
+//method used to calculate the total salary of the employees
   getTotalSalary(){
     return this.employees.reduce((total, employee) => total+employee.salary, 0)
   }

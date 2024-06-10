@@ -41,6 +41,10 @@ export class EmployeeFormComponent implements OnChanges {
         doj: this.data?.doj,
     })
   }
+  else if (!this.data)
+  {
+    this.employeeForm.reset();
+  }
 }
   onClose() { //closes form
     this.onCloseModel.emit(false);
