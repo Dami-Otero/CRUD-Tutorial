@@ -64,8 +64,9 @@ export class EmployeeFormComponent implements OnChanges {
     this.onCloseModel.emit(false);
   }
   onSubmit(){ //for form submission and submit button
+    console.log("Form Submitted", this.employeeForm.value); //trying to figure out why submit button doesn't work
     if (this.employeeForm.valid) {
-
+      console.log('Updating Employee:', this.employeeForm.value);
       if (this.data){ //updates the employee if the data exists
         this.employeeService.updateEmployee(this.data.id as string, this.employeeForm.value).subscribe({next:(response)=>
           {
@@ -77,6 +78,7 @@ export class EmployeeFormComponent implements OnChanges {
 
       }
       else { //creates new emplpyee if data does not exist
+      console.log('Creating Employee:', this.employeeForm.value);
       this.employeeService.createEmployee(this.employeeForm.value).subscribe({next:(response)=>
       {
         this.toastService.success(response.message);

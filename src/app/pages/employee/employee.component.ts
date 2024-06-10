@@ -5,16 +5,18 @@ import { ToastrService } from 'ngx-toastr';
 import { EmployeeService } from '../../services/employee.service';
 import { IEmployee } from '../shared/models/Employee';
 import { CommonModule } from '@angular/common';
+import { LoaderComponent } from '../../loader/loader.component';
 @Component({
   selector: 'app-employee',
   standalone: true,
-  imports: [ModelComponent, EmployeeFormComponent, CommonModule],
+  imports: [ModelComponent, EmployeeFormComponent, CommonModule, LoaderComponent],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.scss',
 })
 export class EmployeeComponent implements OnInit{
   isModelOpen = false;
   isEditMode = false;
+  isLoading = true; //starts true since must be displayed first
   employees: IEmployee[] = []; //array that holds list of employees
   employee: IEmployee | null = null; //for one employees data, | null = null allows employee to be null
 constructor(private employeeService: EmployeeService, private toastService: ToastrService){}
@@ -26,9 +28,10 @@ ngOnInit(): void{
 }
 
 getAllEmployee(){ //method to get employees
-
+  this.isLoading=true; //shows loader before request
   this.employeeService.getAllEmployee().subscribe({
     next: (response) => {
+      this.isLoading=false; //stops showing after request
       if (response && Array.isArray(response))  //only passes the data when it is in an arrray to avoid undefined entries
         this.employees = response; //assignes fetched data to this.employees
       console.log('Fetched employees', this.employees);
