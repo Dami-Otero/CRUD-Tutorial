@@ -1,5 +1,5 @@
 import {Component, Input, EventEmitter, Output, SimpleChange, SimpleChanges, OnChanges} from '@angular/core'
-import {FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import { EmployeeService } from '../../services/employee.service';
 import { IEmployee } from '../shared/models/Employee';
 import { ToastrService } from 'ngx-toastr';
@@ -21,12 +21,12 @@ export class EmployeeFormComponent implements OnChanges {
   constructor(private fb: FormBuilder, private employeeService: EmployeeService, private toastService: ToastrService) {
     this.employeeForm = this.fb.group({ 
       //required validators to create the form group
-      name: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      mobile: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]), //only numbers
+      email: new FormControl('', [Validators.required, Validators.email]), //email must be valid
+      mobile: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(15)]), //Num digits from 7-15
       dob: new FormControl('', [Validators.required]),
       doj: new FormControl('', [Validators.required]),
-      salary: [0, [Validators.required, Validators.min(0)]] 
+      salary: [0, [Validators.required, Validators.min(0)]] //no negative numbers
     })
 
   } 

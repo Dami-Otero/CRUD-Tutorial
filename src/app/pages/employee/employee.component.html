@@ -1,9 +1,9 @@
 <app-loader *ngIf="isLoading"></app-loader>
-<div *ngIf = "!isLoading"> <!--runs when loader is gone-->
+<div *ngIf = "!isLoading" class = "flex flex-col items-center big-gray-100"> <!--runs when loader is gone, -->
   <div class="flex justify-between items-center mb-6">
     <h4 class="font-bold text-2xl"></h4>
     <button type="button" (click)="openModel()"
-      class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-full px-6 py-3 text-center mb-2 ">
+      class="text-white bg-purple-700 hover:bg-purple-800 focus:outline-none font-medium rounded-full px-6 py-3 text-center mb-2 ">
       Add New Employee</button> <!-- changed to add new employee-->
   </div>
   <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -66,8 +66,8 @@
       <!-- adds total salary using currency pipe at the bottom-->
         <tfoot>
           <tr>
-            <td colspan = "4" class="text-right font-bold">Total Salary</td>
-            <td class="px-6 py-4">{{getTotalSalary() | currency}}</td>
+            <td colspan = "4" class="text-right font-bold text-purple-700">Total Salary:</td>
+            <td class="px-6 py-4 text-purple-700">{{getTotalSalary() | currency}}</td>
           </tr>
         </tfoot>
     </table>

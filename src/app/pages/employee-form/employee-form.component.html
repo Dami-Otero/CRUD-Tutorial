@@ -6,42 +6,64 @@
     <input type="text" id="name" class="form-control" placeholder="Name" formControlName="name">
         <!-- When data is not filled out, gives required message -->
     @if (employeeForm.get('name')?.hasError('required') && employeeForm.get('name')?.touched) { 
-    <div class="form-error">Name is required</div>
+    <div class="form-error text-red-500">Name is required</div>
     }
   </div>
   <div class="mb-5">
     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Email Address</label>
     <input type="email" id="email" class="form-control" placeholder="Email Address" formControlName="email">
     @if (employeeForm.get('email')?.hasError('required') && employeeForm.get('email')?.touched) {
-    <div class="form-error">Email is required</div>
+    <div class="form-error text-red-500">Email is required</div>
     }
+    @if (employeeForm.get('email')?.hasError('email') && employeeForm.get('email')?.touched) {
+      <div class="form-error text-red-500">Email must be valid</div>
+      }
   </div>
   <div class="mb-5">
     <label for="mobile" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Mobile</label>
     <input type="text" id="mobile" class="form-control" placeholder="Mobile" formControlName="mobile">
     @if (employeeForm.get('mobile')?.hasError('required') && employeeForm.get('mobile')?.touched) {
-    <div class="form-error">Mobile is required</div>
+    <div class="form-error text-red-500">Mobile is required</div>
+    }
+    @if (employeeForm.get('mobile')?.hasError('minlength') && employeeForm.get('mobile')?.touched) {
+      <div class="form-error text-red-500">Mobile number must be at least 7 digits</div>
+      }
+    @if (employeeForm.get('mobile')?.hasError('maxlength') && employeeForm.get('mobile')?.touched) {
+    <div class="form-error text-red-500">Mobile number must be no more than 15 digits</div>
     }
   </div>
   <div class="mb-5">
     <label for="dob" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Date of Birth</label>
     <input type="date" id="dob" class="form-control" placeholder="" formControlName="dob">
+    @if (employeeForm.get('dob')?.hasError('required') && employeeForm.get('dob')?.touched) {
+      <div class="form-error text-red-500">DOB is required</div>
+      }
   </div>
   <div class="mb-5">
     <label for="doj" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Date of Joining</label>
     <input type="date" id="doj" class="form-control" placeholder="" formControlName="doj">
+    @if (employeeForm.get('doj')?.hasError('required') && employeeForm.get('doj')?.touched) {
+      <div class="form-error text-red-500">DOJ is required</div>
+      }
   </div>
 
   <!-- adds Salary to be displayed-->
   <div class="mb-5">
     <label for="salary" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Salary</label>
     <input type="number" id="salary" class="form-control" placeholder="" formControlName="salary">
+    @if (employeeForm.get('salary')?.hasError('required') && employeeForm.get('salary')?.touched) {
+      <div class="form-error text-red-500">Salary is required</div>
+      }
+    @if (employeeForm.get('salary')?.hasError('min') && employeeForm.get('salary')?.touched) {
+      <div class="form-error text-red-500">Salary must be a positive number</div>
+      }
   </div>
 
 
   <!-- Submit button -->
   <button type="submit"
-    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center" [disabled] = "employeeForm.invalid"
+    >Submit</button>
     <!-- Cancel button -->
   <button type="button" (click)="onClose()"
     class="text-white  ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">Cancel</button>
