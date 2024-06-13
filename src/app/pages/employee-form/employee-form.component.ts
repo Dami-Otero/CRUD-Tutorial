@@ -21,7 +21,7 @@ export class EmployeeFormComponent implements OnChanges {
   constructor(private fb: FormBuilder, private employeeService: EmployeeService, private toastService: ToastrService) {
     this.employeeForm = this.fb.group({ 
       //required validators to create the form group
-      name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]), //only numbers
+      name: new FormControl('', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]), //only letters
       email: new FormControl('', [Validators.required, Validators.email]), //email must be valid
       mobile: new FormControl('', [Validators.required, Validators.minLength(7), Validators.maxLength(15)]), //Num digits from 7-15
       dob: new FormControl('', [Validators.required]),
