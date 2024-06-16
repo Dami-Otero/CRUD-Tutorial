@@ -1,0 +1,59 @@
+<h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-black">Outcome Details</h5>
+<form [formGroup]="outcomeForm" class="w-full" (ngSubmit)="onSubmit()" novalidate>
+  <div class="mb-5">
+    <!-- label for company, rest below-->
+    <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Company</label>
+    <input type="text" id="company" class="form-control" placeholder="Company" formControlName="company">
+    <!-- error company field is require, rest below -->
+    <div *ngIf="outcomeForm.get('company')?.hasError('required') && outcomeForm.get('company')?.touched" class="form-error text-red-500">
+      Company is required
+    </div>
+  </div>
+  <div class="mb-5">
+    <label for="invoice_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Invoice Number</label>
+    <input type="number" id="invoice_number" class="form-control" placeholder="Invoice Number" formControlName="invoice_number">
+    <div *ngIf="outcomeForm.get('invoice_number')?.hasError('required') && outcomeForm.get('invoice_number')?.touched" class="form-error text-red-500">
+      Invoice Number is required
+    </div>
+    <div *ngIf="outcomeForm.get('invoice_number')?.hasError('min')" class="form-error text-red-500">
+      Invoice Number must be positive
+    </div>
+  </div>
+  <div class="mb-5">
+    <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Amount</label>
+    <input type="number" id="amount" class="form-control" placeholder="Amount" formControlName="amount">
+    <div *ngIf="outcomeForm.get('amount')?.hasError('required') && outcomeForm.get('amount')?.touched" class="form-error text-red-500">
+      Amount is required
+    </div>
+    <div *ngIf="outcomeForm.get('amount')?.hasError('min')" class="form-error text-red-500">
+      Amount must be positive
+    </div>
+  </div>
+  <div class="mb-5">
+    <label for="due_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Due Date</label>
+    <input type="date" id="due_date" class="form-control" formControlName="due_date">
+    <div *ngIf="outcomeForm.get('due_date')?.hasError('required') && outcomeForm.get('due_date')?.touched" class="form-error text-red-500">
+      Due Date is required
+    </div>
+  </div>
+  <div class="mb-5">
+    <label for="is_paid" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Is Paid</label>
+    <select id="is_paid" class="form-control" formControlName="is_paid">
+      <option value="true">Yes</option>
+      <option value="false">No</option>
+    </select>
+    <div *ngIf="outcomeForm.get('is_paid')?.hasError('required') && outcomeForm.get('is_paid')?.touched" class="form-error text-red-500">
+      This field is required
+    </div>
+  </div>
+  <!-- submit button -->
+  <button type="submit"
+    class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center" [disabled]="outcomeForm.invalid">
+    Submit
+  </button>
+  <!-- cancel button-->
+  <button type="button" (click)="onClose()"
+    class="text-white ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">
+    Cancel
+  </button>
+</form>

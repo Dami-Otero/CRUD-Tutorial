@@ -1,1 +1,35 @@
-<p>outcome works!</p>
+<div class="container mx-auto px-4">
+    <h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-black">Outcome Details</h5>
+    <button type="button" (click)="openModel()" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 text-center">
+      Add New Outcome
+    </button>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">ID</th>
+          <th scope="col" class="px-6 py-3">Company</th>
+          <th scope="col" class="px-6 py-3">Invoice Number</th>
+          <th scope="col" class="px-6 py-3">Amount</th>
+          <th scope="col" class="px-6 py-3">Due Date</th>
+          <th scope="col" class="px-6 py-3">Is Paid</th>
+          <th scope="col" class="px-6 py-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let outcome of outcomes" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <td class="px-6 py-4">{{ outcome.id }}</td>
+          <td class="px-6 py-4">{{ outcome.company }}</td>
+          <td class="px-6 py-4">{{ outcome.invoice_number }}</td>
+          <td class="px-6 py-4">{{ outcome.amount }}</td>
+          <td class="px-6 py-4">{{ outcome.due_date }}</td>
+          <td class="px-6 py-4">{{ outcome.is_paid }}</td>
+          <td class="px-6 py-4">
+            <button (click)="loadOutcome(outcome)" class="text-blue-600 hover:underline">Edit</button>
+            <button (click)="deleteOutcome(outcome.id!)" class="text-red-600 hover:underline">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-outcome-form *ngIf="isModelOpen" [isEditMode]="isEditMode" [data]="outcome" (onCloseModel)="closeModel()"></app-outcome-form>
+  </div>
+  

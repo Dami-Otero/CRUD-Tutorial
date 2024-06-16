@@ -1,1 +1,35 @@
-<p>income works!</p>
+<div class="container mx-auto px-4">
+    <h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-black">Income Details</h5>
+    <button type="button" (click)="openModel()" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg px-5 py-2.5 text-center">
+      Add New Income
+    </button>
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-4">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">ID</th>
+          <th scope="col" class="px-6 py-3">Company</th>
+          <th scope="col" class="px-6 py-3">Invoice Number</th>
+          <th scope="col" class="px-6 py-3">Amount</th>
+          <th scope="col" class="px-6 py-3">Due Date</th>
+          <th scope="col" class="px-6 py-3">Is Paid</th>
+          <th scope="col" class="px-6 py-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let income of incomes" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <td class="px-6 py-4">{{ income.id }}</td>
+          <td class="px-6 py-4">{{ income.company }}</td>
+          <td class="px-6 py-4">{{ income.invoice_number }}</td>
+          <td class="px-6 py-4">{{ income.amount }}</td>
+          <td class="px-6 py-4">{{ income.due_date }}</td>
+          <td class="px-6 py-4">{{ income.is_paid }}</td>
+          <td class="px-6 py-4">
+            <button (click)="loadIncome(income)" class="text-blue-600 hover:underline">Edit</button>
+            <button (click)="deleteIncome(income.id!)" class="text-red-600 hover:underline">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-income-form *ngIf="isModelOpen" [isEditMode]="isEditMode" [data]="income" (onCloseModel)="closeModel()"></app-income-form>
+  </div>
+  
