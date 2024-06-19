@@ -1,60 +1,65 @@
-<h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-black">Income Details</h5>
-<form [formGroup]="incomeForm" class="w-full" (ngSubmit)="onSubmit()" novalidate>
-  <div class="mb-5">
-    <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Company</label>
-    <input type="text" id="company" class="form-control" placeholder="Company" formControlName="company">
-    @if (incomeForm.get('company')?.hasError('required') && incomeForm.get('company')?.touched) { 
-      <div class="form-error text-red-500">Company is required</div>
-    }
+<div class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" >
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+      <h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-black">Income Details</h5>
+      <form [formGroup]="incomeForm" class="w-full" (ngSubmit)="onSubmit()" novalidate>
+        <div class="mb-5">
+          <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Company</label>
+          <input type="text" id="company" class="form-control" placeholder="Company" formControlName="company">
+          @if (incomeForm.get('company')?.hasError('required') && incomeForm.get('company')?.touched) { 
+            <div class="form-error text-red-500">Company is required</div>
+          }
+        </div>
+
+        <div class="mb-5">
+          <label for="invoice_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Invoice Number</label>
+          <input type="string" id="invoice_number" class="form-control" placeholder="Invoice Number" formControlName="invoice_number">
+          @if (incomeForm.get('invoice_number')?.hasError('required') && incomeForm.get('invoice_number')?.touched) {
+            <div class="form-error text-red-500">Invoice Number is required</div>
+          }
+          @if (incomeForm.get('invoice_number')?.hasError('min')) {
+            <div class="form-error text-red-500">Invoice Number must be positive</div>
+          }
+        </div>
+
+        <div class="mb-5">
+          <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Amount</label>
+          <input type="number" id="amount" class="form-control" placeholder="Amount" formControlName="amount">
+          @if (incomeForm.get('amount')?.hasError('required') && incomeForm.get('amount')?.touched) {
+            <div class="form-error text-red-500">Amount is required</div>
+          }
+          @if (incomeForm.get('amount')?.hasError('min')) {
+            <div class="form-error text-red-500">Amount must be positive</div>
+          }
+        </div>
+
+        <div class="mb-5">
+          <label for="due_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Due Date</label>
+          <input type="date" id="due_date" class="form-control" formControlName="due_date">
+          @if (incomeForm.get('due_date')?.hasError('required') && incomeForm.get('due_date')?.touched) {
+            <div class="form-error text-red-500">Due Date is required</div>
+          }
+        </div>
+
+        <div class="mb-5">
+          <label for="is_paid" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Is Paid</label>
+          <select id="is_paid" class="form-control" formControlName="is_paid">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+          @if (incomeForm.get('is_paid')?.hasError('required') && incomeForm.get('is_paid')?.touched) {
+            <div class="form-error text-red-500">This field is required</div>
+          }
+        </div>
+
+        <button type="submit"
+          class="text-white bg-blue-700 hover:bg-blue-800 disabled:bg-slate-400 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center" [disabled]="incomeForm.invalid">
+          Submit
+        </button>
+        <button type="button" (click)="onClose()"
+          class="text-white ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">
+          Cancel
+        </button>
+      </form>
+    </div>
   </div>
   
-  <div class="mb-5">
-    <label for="invoice_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Invoice Number</label>
-    <input type="number" id="invoice_number" class="form-control" placeholder="Invoice Number" formControlName="invoice_number">
-    @if (incomeForm.get('invoice_number')?.hasError('required') && incomeForm.get('invoice_number')?.touched) {
-      <div class="form-error text-red-500">Invoice Number is required</div>
-    }
-    @if (incomeForm.get('invoice_number')?.hasError('min')) {
-      <div class="form-error text-red-500">Invoice Number must be positive</div>
-    }
-  </div>
-  
-  <div class="mb-5">
-    <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Amount</label>
-    <input type="number" id="amount" class="form-control" placeholder="Amount" formControlName="amount">
-    @if (incomeForm.get('amount')?.hasError('required') && incomeForm.get('amount')?.touched) {
-      <div class="form-error text-red-500">Amount is required</div>
-    }
-    @if (incomeForm.get('amount')?.hasError('min')) {
-      <div class="form-error text-red-500">Amount must be positive</div>
-    }
-  </div>
-  
-  <div class="mb-5">
-    <label for="due_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Due Date</label>
-    <input type="date" id="due_date" class="form-control" formControlName="due_date">
-    @if (incomeForm.get('due_date')?.hasError('required') && incomeForm.get('due_date')?.touched) {
-      <div class="form-error text-red-500">Due Date is required</div>
-    }
-  </div>
-  
-  <div class="mb-5">
-    <label for="is_paid" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Is Paid</label>
-    <select id="is_paid" class="form-control" formControlName="is_paid">
-      <option value="true">Yes</option>
-      <option value="false">No</option>
-    </select>
-    @if (incomeForm.get('is_paid')?.hasError('required') && incomeForm.get('is_paid')?.touched) {
-      <div class="form-error text-red-500">This field is required</div>
-    }
-  </div>
-  
-  <button type="submit"
-    class="text-white bg-blue-700 hover:bg-blue-800 disabled:bg-slate-400 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center" [disabled]="incomeForm.invalid">
-    Submit
-  </button>
-  <button type="button" (click)="onClose()"
-    class="text-white ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">
-    Cancel
-  </button>
-</form>

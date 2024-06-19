@@ -19,7 +19,6 @@ export class IncomeFormComponent implements OnChanges {
 
   constructor(private fb: FormBuilder, private incomeService: IncomeService) {
     this.incomeForm = this.fb.group({ //initialize form and creates validators
-      //id: [0, Validators.required],
       company: [null, [Validators.required]],
       invoice_number: [null, [Validators.required]],
       amount: [null, [Validators.required, Validators.min(0)]],

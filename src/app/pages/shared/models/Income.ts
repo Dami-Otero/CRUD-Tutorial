@@ -8,7 +8,7 @@ export interface ApiResponse<T> {
     
     id?: number;
     company: string;
-    invoice_number: number;
+    invoice_number: string;
     invoice_date: string;
     amount: string;
     due_date: string;

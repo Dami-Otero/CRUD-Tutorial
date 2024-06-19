@@ -19,12 +19,11 @@ export class OutcomeFormComponent implements OnChanges {
 
   constructor(private fb: FormBuilder, private outcomeService: OutcomeService) {
     this.outcomeForm = this.fb.group({ 
-      id: [0, Validators.required],
-      company: ['', [Validators.required]],
-      invoice_number: [0, [Validators.required, Validators.min(0)]], //add all required validators
-      amount: [0, [Validators.required, Validators.min(0)]],
-      due_date: ['', Validators.required],
-      is_paid: ['', Validators.required]
+      company: [null, [Validators.required]],
+      invoice_number: [null, [Validators.required,]], //add all required validators
+      amount: [null, [Validators.required, Validators.min(0)]],
+      due_date: [null, Validators.required],
+      is_paid: [null, Validators.required]
     });
   }
 
@@ -45,12 +44,11 @@ export class OutcomeFormComponent implements OnChanges {
 
   resetForm() { //resets form
     this.outcomeForm.reset({
-      id: 0,
-      company: '',
-      invoice_number: 0,
-      amount: 0,
-      due_date: '',
-      is_paid: ''
+      company: null,
+      invoice_number: null,
+      amount: null,
+      due_date: null,
+      is_paid: null
     });
   }
 

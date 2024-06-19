@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-
+import { ModalService } from '../services/modal.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -11,14 +12,23 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 
-  constructor(private route:Router){
+  currentRoute!: string;
 
+  constructor(private route:Router, private modalService: ModalService){
+    this.route.events.subscribe(() => {
+      this.currentRoute = this.route.url;
+    });
   }
 
   goto(location:string){
     console.log(location)
     this.route.navigate([location]);
-    
+  }
+  openIncomeModal() {
+    this.modalService.openIncomeModal();
+  }
+  openOutcomeModal() {
+    this.modalService.openOutcomeModal();
   }
 
 }

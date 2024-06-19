@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ModelComponent } from '../pages/shared/ui/model/model.component';
 import { IncomeService } from '../services/income.service';
 import { IncomeFormComponent } from '../income-form/income-form.component'; 
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-income',
@@ -19,10 +20,13 @@ export class IncomeComponent implements OnInit {
   isEditMode = false; //starts in non edit
   income: _income | null = null;
 
-  constructor(private incomeService: IncomeService) {}
+  constructor(private incomeService: IncomeService, private modalService: ModalService) {}
 
   ngOnInit(): void {
     this.loadIncomes();
+    this.modalService.openIncomeModal$.subscribe(() => {
+      this.openModel();
+    });
   }
 
   loadIncomes() { //loads incomes

@@ -6,6 +6,7 @@ import { RecapComponent } from './recap/recap.component';
 
 export const routes: Routes = [
     { path: 'income', component: IncomeComponent },
-  { path: 'outcome', component: OutcomeComponent },
-  { path: 'recap', component: RecapComponent },
+    { path: 'outcome', component: OutcomeComponent },
+    { path: 'recap', component: RecapComponent },
+    { path: '', redirectTo: '/income', pathMatch: 'full' }, //makes income default route
 ]; 

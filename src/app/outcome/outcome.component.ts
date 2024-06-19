@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ModelComponent } from '../pages/shared/ui/model/model.component';
 import { OutcomeService } from '../services/outcome.service';
 import { OutcomeFormComponent } from '../outcome-form/outcome-form.component'; // Import OutcomeFormComponent
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-outcome',
@@ -19,10 +20,13 @@ export class OutcomeComponent implements OnInit {
   isEditMode = false;
   outcome: _outcome | null = null;
 
-  constructor(private outcomeService: OutcomeService) {}
+  constructor(private outcomeService: OutcomeService, private modalService: ModalService) {}
 
   ngOnInit(): void {
     this.loadOutcomes();
+    this.modalService.openOutcomeModal$.subscribe(() => {
+      this.openModel();
+    });
   }
 
   loadOutcomes() { //loads outcomes
