@@ -59,6 +59,9 @@
           class="text-white ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">
           Cancel
         </button>
+        @if (incomeForm.invalid) {
+            <div class="text-red-500 mt-2">Form is incomplete</div>
+          }
       </form>
     </div>
   </div>

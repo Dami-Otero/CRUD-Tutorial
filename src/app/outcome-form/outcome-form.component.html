@@ -50,14 +50,17 @@
         </div>
         <!-- submit button -->
         <button type="submit"
-          class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center" [disabled]="outcomeForm.invalid">
-          Submit
+            class="text-white bg-blue-700 hover:bg-blue-800 disabled:bg-slate-400 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center" [disabled]="outcomeForm.invalid">
+            Submit
         </button>
         <!-- cancel button-->
         <button type="button" (click)="onClose()"
           class="text-white ms-2 bg-gray-700 hover:bg-gray-800 font-medium rounded-lg w-full sm:w-auto px-5 py-2.5 text-center">
           Cancel
         </button>
+        @if (outcomeForm.invalid) {
+            <div class="text-red-500 mt-2">Form is incomplete</div>
+          }
       </form>
     </div>
   </div>
