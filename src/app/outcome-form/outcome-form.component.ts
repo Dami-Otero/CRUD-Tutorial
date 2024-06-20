@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { OutcomeService } from '../services/outcome.service';
 import { _outcome } from '../pages/shared/models/Outcome';
 import { CommonModule } from '@angular/common';
+import { IncomeComponent } from '../income/income.component';
 
 @Component({
   selector: 'app-outcome-form',
