@@ -12,7 +12,7 @@ export interface ApiResponse<T> {
     invoice_date: string;
     amount: string;
     due_date: string;
-    is_paid: boolean;
+    is_paid: boolean | string;
   }
 
   

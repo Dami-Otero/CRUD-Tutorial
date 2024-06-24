@@ -3,10 +3,12 @@ import { EmployeeComponent } from './pages/employee/employee.component';
 import { IncomeComponent } from './income/income.component';
 import { OutcomeComponent } from './outcome/outcome.component';
 import { RecapComponent } from './recap/recap.component';
+import { CompanyDetailComponent } from './company-detail/company-detail.component';
 
-export const routes: Routes = [
+export const routes: Routes = [ //array to define routes 
+    { path: '', redirectTo: '/income', pathMatch: 'full' }, //makes income default route, '' for initial url
     { path: 'income', component: IncomeComponent },
     { path: 'outcome', component: OutcomeComponent },
+    { path: 'company/:id', component: CompanyDetailComponent },
     { path: 'recap', component: RecapComponent },
-    { path: '', redirectTo: '/income', pathMatch: 'full' }, //makes income default route
 ]; 

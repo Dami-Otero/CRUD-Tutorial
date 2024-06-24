@@ -32,9 +32,9 @@
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a (click)="goto('income')" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 active:text-blue-500 hover:bg-gray-700 hover:text-white">Income</a>
-              <a (click)="goto('outcome')" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 active:text-blue-500 hover:bg-gray-700 hover:text-white">Outcome</a>
-              <a (click)="goto('recap')" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 active:text-blue-500 hover:bg-gray-700 hover:text-white">Recap</a>
+              <a (click)="goto('income')"  routerLink="/income" routerLinkActive="bg-slate-600 text-white" [routerLinkActiveOptions]="{ exact: true }" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 active:text-blue-500 hover:bg-gray-700 hover:text-white">Income</a>
+              <a (click)="goto('outcome')" routerLink="/outcome" routerLinkActive="bg-slate-600 text-white" [routerLinkActiveOptions]="{ exact: true }" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 active:text-blue-500 hover:bg-gray-700 hover:text-white">Outcome</a>
+              <a (click)="goto('recap')" routerLink="/recap" routerLinkActive="bg-slate-600 text-white" [routerLinkActiveOptions]="{ exact: true }" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 active:text-blue-500 hover:bg-gray-700 hover:text-white">Recap</a>
             </div>
           </div>
         </div>
@@ -73,9 +73,9 @@
         </div>
     <div class="sm:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2">
-        <a routerLink="/income" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white active:text-blue-500">Income</a>
-        <a routerLink="/outcome" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white active:text-blue-500">Outcome</a>
-        <a routerLink="/recap" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white active:text-blue-500">Recap</a>
+        <a routerLink="/income" routerLinkActive="bg-slate-600 text-white" [routerLinkActiveOptions]="{ exact: true }" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white active:text-blue-500">Income</a>
+        <a routerLink="/outcome" routerLinkActive="bg-slate-600 text-white" [routerLinkActiveOptions]="{ exact: true }" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white active:text-blue-500">Outcome</a>
+        <a routerLink="/recap" routerLinkActive="bg-slate-600 text-white" [routerLinkActiveOptions]="{ exact: true }" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white active:text-blue-500">Recap</a>
       </div>
     </div>
   </nav>

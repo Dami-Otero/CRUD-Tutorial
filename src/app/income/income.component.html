@@ -15,11 +15,13 @@
       <tbody>
         <tr *ngFor="let income of incomes" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
           <td class="px-6 py-4">{{ income.id }}</td>
-          <td class="px-6 py-4">{{ income.company }}</td>
+          <td class="px-6 py-4">
+            <a [routerLink]="['/company', income.id]" class="text-blue-600 hover:underline">{{ income.company }}</a>
+          </td>
           <td class="px-6 py-4">{{ income.invoice_number }}</td>
           <td class="px-6 py-4">{{ income.amount }}</td>
           <td class="px-6 py-4">{{ income.due_date }}</td>
-          <td class="px-6 py-4">{{ income.is_paid }}</td>
+          <td class="px-6 py-4">{{ income.is_paid === 'true' ? 'Yes' : 'No' }}</td>
           <td class="px-6 py-4">
             <button (click)="loadIncome(income)" class="text-blue-600 hover:underline">Edit</button>
             <button (click)="deleteIncome(income.id!)" class="text-red-600 hover:underline">Delete</button>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { UrlTree, IsActiveMatchOptions } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

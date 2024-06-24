@@ -6,11 +6,12 @@ import { ModelComponent } from '../pages/shared/ui/model/model.component';
 import { OutcomeService } from '../services/outcome.service';
 import { OutcomeFormComponent } from '../outcome-form/outcome-form.component'; // Import OutcomeFormComponent
 import { ModalService } from '../services/modal.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-outcome',
   standalone: true,
-  imports: [ModelComponent, CommonModule, ReactiveFormsModule, OutcomeFormComponent], // Add OutcomeFormComponent here
+  imports: [ModelComponent, CommonModule, ReactiveFormsModule, OutcomeFormComponent, RouterModule], // Add OutcomeFormComponent here
   templateUrl: './outcome.component.html',
   styleUrls: ['./outcome.component.css']
 })

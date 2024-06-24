@@ -1,0 +1,29 @@
+<div class="container mx-auto px-4">
+    <h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-black">
+      {{ companyId }}
+    </h5>
+  
+    <table class="w-full max-w-4xl mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            <th scope="col" class="px-6 py-3">ID</th>
+            <th scope="col" class="px-6 py-3">Company</th>
+            <th scope="col" class="px-6 py-3">Invoice Number</th>
+            <th scope="col" class="px-6 py-3">Amount</th>
+            <th scope="col" class="px-6 py-3">Due Date</th>
+            <th scope="col" class="px-6 py-3">Is Paid</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let income of incomes" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <td class="px-6 py-4">{{ income.id }}</td>
+            <td class="px-6 py-4">{{ income.company }} </td>
+            <td class="px-6 py-4">{{ income.invoice_number }}</td>
+            <td class="px-6 py-4">{{ income.amount }}</td>
+            <td class="px-6 py-4">{{ income.due_date }}</td>
+            <td class="px-6 py-4">{{ income.is_paid === 'true' ? 'Yes' : 'No' }}</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  
