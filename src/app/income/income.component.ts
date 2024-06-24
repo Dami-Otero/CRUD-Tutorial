@@ -6,11 +6,12 @@ import { ModelComponent } from '../pages/shared/ui/model/model.component';
 import { IncomeService } from '../services/income.service';
 import { IncomeFormComponent } from '../income-form/income-form.component'; 
 import { ModalService } from '../services/modal.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-income',
   standalone: true,
-  imports: [ModelComponent, CommonModule, IncomeFormComponent], 
+  imports: [ModelComponent, CommonModule, IncomeFormComponent, RouterModule], 
   templateUrl: './income.component.html',
   styleUrls: ['./income.component.css']
 })
@@ -20,7 +21,13 @@ export class IncomeComponent implements OnInit {
   isEditMode = false; //starts in non edit
   income: _income | null = null;
 
-  constructor(private incomeService: IncomeService, private modalService: ModalService) {}
+  constructor(private incomeService: IncomeService, private modalService: ModalService, private router: Router) {
+    
+  }
+  
+  goto(route: string) {
+    this.router.navigate([route]);
+  }
 
   ngOnInit(): void {
     this.loadIncomes();
@@ -37,7 +44,7 @@ export class IncomeComponent implements OnInit {
     this.isModelOpen = true;
   }
 
-  closeModel() { //
+  closeModel() { 
     this.isModelOpen = false; 
     this.isEditMode = false;
     this.loadIncomes();
