@@ -12,7 +12,10 @@ export class CompanyService {
 
   constructor(private http: HttpClient) {}
 
-  getCompanyIncome(companyName: string): Observable<_income[]> {
-    return this.http.get<_income[]>(`${this.apiUrl}?company=${companyName}`);
+  getCompanyIncomeByName(name: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?company=${name}`);
+  }
+  getCompanyOutcomeByName(name: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?company=${name}`);
   }
 }

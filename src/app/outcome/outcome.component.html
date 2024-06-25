@@ -16,7 +16,7 @@
         <tr *ngFor="let outcome of outcomes" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
           <td class="px-6 py-4">{{ outcome.id }}</td>
           <td class="px-6 py-4">
-            <a [routerLink]="['/company', outcome.id]" class="text-blue-600 hover:underline">{{ outcome.company }}</a>
+            <a [routerLink]="['/outcome', outcome.company]" class="text-blue-600 hover:underline">{{ outcome.company }}</a>
           </td>
           <td class="px-6 py-4">{{ outcome.invoice_number }}</td>
           <td class="px-6 py-4">{{ outcome.amount }}</td>

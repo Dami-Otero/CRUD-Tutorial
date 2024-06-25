@@ -16,7 +16,7 @@
         <tr *ngFor="let income of incomes" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
           <td class="px-6 py-4">{{ income.id }}</td>
           <td class="px-6 py-4">
-            <a [routerLink]="['/company', income.id]" class="text-blue-600 hover:underline">{{ income.company }}</a>
+            <a [routerLink]="['/income', income.company]" class="text-blue-600 hover:underline">{{ income.company }}</a>
           </td>
           <td class="px-6 py-4">{{ income.invoice_number }}</td>
           <td class="px-6 py-4">{{ income.amount }}</td>
