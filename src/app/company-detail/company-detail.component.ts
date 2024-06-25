@@ -21,19 +21,24 @@ export class CompanyDetailComponent implements OnInit {
   ngOnInit(): void {
     this.companyId = this.route.snapshot.paramMap.get('id')!; //provides company id
     this.companyName = this.route.snapshot.paramMap.get('name')!; //provides company name
-    this.loadCompanyDetails(this.companyName); //load company details with name
+    this.loadCompanyDetails(this.companyName, 'income'); //load company details with name
   }
 
-  loadCompanyDetails(name: string) {
-    this.companyService.getCompanyIncomeByName(name).subscribe({ // get income data by company name
-      next: (incomes) => {
-        this.incomes = incomes;
+  loadCompanyDetails(name: string, type: "income" | "outcome") {
+    this.companyService.getElementsByParam('http://localhost:3000', name, type, 'company').subscribe({ // get income data by company name
+      next: (elements) => {
+        if(type == 'income'){
+          this.incomes = elements;
+        } else {
+          this.outcomes = elements;
+        }
+        
       },
     });
-    this.companyService.getCompanyOutcomeByName(name).subscribe({
-      next: (outcomes) => {
-        this.outcomes = outcomes;
-      },
-    });
+    // this.companyService.getCompanyOutcomeByName(name).subscribe({
+    //   next: (outcomes) => {
+    //     this.outcomes = outcomes;
+    //   },
+    // });
   }
 }
