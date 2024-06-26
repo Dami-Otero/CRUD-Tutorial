@@ -34,6 +34,7 @@ export class OutcomeFormComponent implements OnChanges {
         id: this.data.id,
         company: this.data.company,
         invoice_number: this.data.invoice_number,
+        invoice_date: this.data.invoice_date,
         amount: this.data.amount,
         due_date: this.data.due_date,
         is_paid: this.data.is_paid
@@ -47,6 +48,7 @@ export class OutcomeFormComponent implements OnChanges {
     this.outcomeForm.reset({
       company: null,
       invoice_number: null,
+      invoice_date: null,
       amount: null,
       due_date: null,
       is_paid: null

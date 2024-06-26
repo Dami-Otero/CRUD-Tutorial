@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -15,7 +15,7 @@ export class NavbarComponent {
 
   currentRoute!: string;
 
-  constructor(private route:Router, private modalService: ModalService){ //injects router and modal service into component
+  constructor(public route:Router, private modalService: ModalService){ //injects router and modal service into component
     this.route.events.subscribe(() => { //detects route changes
       //console.log(this.route) 
       console.log(this.route.url)

@@ -22,6 +22,15 @@
         </div>
 
         <div class="mb-5">
+          <label for="invoice_date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Invoice Date</label>
+          <input type="date" id="invoice_date" class="form-control" formControlName="invoice_date">
+          @if (incomeForm.get('invoice_date')?.hasError('required') && incomeForm.get('invoice_date')?.touched) {
+            <div class="form-error text-red-500">Invoice Date is required</div>
+          }
+        </div>
+
+
+        <div class="mb-5">
           <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Amount</label>
           <input type="number" id="amount" class="form-control" placeholder="Amount" formControlName="amount">
           @if (incomeForm.get('amount')?.hasError('required') && incomeForm.get('amount')?.touched) {

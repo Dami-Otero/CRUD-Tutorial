@@ -41,12 +41,12 @@
 
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <!-- New Income Button -->
-            <button type="button" (click)="openIncomeModal()" class="text-white bg-blue-700 hover:bg-blue-800 disabled:bg-slate-400 font-medium rounded-lg px-5 py-2.5 text-center">
+            <button *ngIf="route.url.includes('/income') || route.url.includes('/recap')" type="button" (click)="openIncomeModal()" class="text-white bg-blue-700 hover:bg-blue-800 disabled:bg-slate-400 font-medium rounded-lg px-5 py-2.5 text-center">
               Add New Income
             </button>
             <!-- New Outcome Button -->
-            <button type="button" (click)="openOutcomeModal()" class="ml-2 text-white bg-blue-700 hover:bg-blue-800 disabled:bg-slate-400  font-medium rounded-lg px-5 py-2.5 text-center ">
-            Add New Outcome
+            <button *ngIf="route.url.includes('/outcome') || route.url.includes('/recap')" type="button" (click)="openOutcomeModal()" class="ml-2 text-white bg-blue-700 hover:bg-blue-800 disabled:bg-slate-400  font-medium rounded-lg px-5 py-2.5 text-center">
+              Add New Outcome
             </button>
           </div>
        

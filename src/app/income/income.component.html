@@ -6,6 +6,7 @@
           <th scope="col" class="px-6 py-3">ID</th>
           <th scope="col" class="px-6 py-3">Company</th>
           <th scope="col" class="px-6 py-3">Invoice Number</th>
+          <th scope="col" class="px-6 py-3">Invoice Date</th>
           <th scope="col" class="px-6 py-3">Amount</th>
           <th scope="col" class="px-6 py-3">Due Date</th>
           <th scope="col" class="px-6 py-3">Is Paid</th>
@@ -19,6 +20,7 @@
             <a [routerLink]="['/income', income.company]" class="text-blue-600 hover:underline">{{ income.company }}</a>
           </td>
           <td class="px-6 py-4">{{ income.invoice_number }}</td>
+          <td class="px-6 py-4">{{ income.invoice_date }}</td>
           <td class="px-6 py-4">{{ income.amount }}</td>
           <td class="px-6 py-4">{{ income.due_date }}</td>
           <td class="px-6 py-4">{{ income.is_paid === 'true' ? 'Yes' : 'No' }}</td>

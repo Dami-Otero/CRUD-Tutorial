@@ -15,17 +15,19 @@ export class CompanyDetailComponent implements OnInit {
   companyName: string = '';
   incomes: any[] = []; //store companies incomes
   outcomes: any[] = [];
+  type: "income" | "outcome" = "income"
 
   constructor(private route: ActivatedRoute, private companyService: CompanyService) { } //routing purposes and accessing company.services
 
   ngOnInit(): void {
     this.companyId = this.route.snapshot.paramMap.get('id')!; //provides company id
     this.companyName = this.route.snapshot.paramMap.get('name')!; //provides company name
-    this.loadCompanyDetails(this.companyName, 'income'); //load company details with name
+    this.type = this.route.snapshot.data['type'] || 'income';
+    this.loadCompanyDetails(this.companyName, this.type); //load company details with name and type
   }
 
   loadCompanyDetails(name: string, type: "income" | "outcome") {
-    this.companyService.getElementsByParam('http://localhost:3000', name, type, 'company').subscribe({ // get income data by company name
+    this.companyService.getElementsByParam('http://localhost:3000', name, type, 'company').subscribe({
       next: (elements) => {
         if(type == 'income'){
           this.incomes = elements;
