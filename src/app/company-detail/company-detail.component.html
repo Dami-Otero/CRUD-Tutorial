@@ -1,10 +1,12 @@
 <div class="container mx-auto px-4">
+  <div class="flex justify-center">
     <h5 *ngIf="type === 'income'" class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-black">
       {{ "Incomes for " + companyName }}
     </h5>
     <h5 *ngIf="type === 'outcome'" class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-black">
       {{ "Outcomes for " + companyName }}
     </h5>
+  </div>
   
     <table class="w-full max-w-4xl mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -24,10 +26,14 @@
             <td class="px-6 py-4">{{ income.id }}</td>
             <td class="px-6 py-4">{{ income.company }} </td>
             <td class="px-6 py-4">{{ income.invoice_number }}</td>
-            <td class="px-6 py-4">{{ income.invoice_date }}</td>
-            <td class="px-6 py-4">{{ income.amount }}</td>
-            <td class="px-6 py-4">{{ income.due_date }}</td>
+            <td class="px-6 py-4">{{ income.invoice_date | date:'dd/MM/yyyy'}}</td>
+            <td class="px-6 py-4">{{ income.amount | currency }}</td>
+            <td class="px-6 py-4">{{ income.due_date | date:'dd/MM/yyyy'}}</td>
             <td class="px-6 py-4">{{ income.is_paid === 'true' ? 'Yes' : 'No' }}</td>
+          </tr>
+          <tr>
+            <td colspan="6" class="px-6 py-4 font-bold text-black text-right">Total Income:</td>
+            <td class="px-6 py-4 text-black font-bold">{{ totalIncome | currency }}</td>
           </tr>
         </ng-container>
         <ng-container *ngIf="type === 'outcome'">
@@ -35,10 +41,14 @@
             <td class="px-6 py-4">{{ outcome.id }}</td>
             <td class="px-6 py-4">{{ outcome.company }} </td>
             <td class="px-6 py-4">{{ outcome.invoice_number }}</td>
-            <td class="px-6 py-4">{{ outcome.invoice_date }}</td>
-            <td class="px-6 py-4">{{ outcome.amount }}</td>
-            <td class="px-6 py-4">{{ outcome.due_date }}</td>
+            <td class="px-6 py-4">{{ outcome.invoice_date | date:'dd/MM/yyyy'}}</td>
+            <td class="px-6 py-4">{{ outcome.amount | currency }}</td>
+            <td class="px-6 py-4">{{ outcome.due_date | date:'dd/MM/yyyy'}}</td>
             <td class="px-6 py-4">{{ outcome.is_paid === 'true' ? 'Yes' : 'No' }}</td>
+          </tr>
+          <tr>
+            <td colspan="6" class="px-6 py-4 font-bold text-black text-right">Total Outcome:</td>
+            <td class="px-6 py-4 text-black font-bold">{{ totalOutcome | currency }}</td>
           </tr>
         </ng-container>
         </tbody>

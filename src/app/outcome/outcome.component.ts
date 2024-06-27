@@ -4,14 +4,14 @@ import { _outcome } from '../pages/shared/models/Outcome';
 import { CommonModule } from '@angular/common';
 import { ModelComponent } from '../pages/shared/ui/model/model.component';
 import { OutcomeService } from '../services/outcome.service';
-import { OutcomeFormComponent } from '../outcome-form/outcome-form.component'; // Import OutcomeFormComponent
+import { OutcomeFormComponent } from '../outcome-form/outcome-form.component';
 import { ModalService } from '../services/modal.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-outcome',
   standalone: true,
-  imports: [ModelComponent, CommonModule, ReactiveFormsModule, OutcomeFormComponent, RouterModule], // Add OutcomeFormComponent here
+  imports: [ModelComponent, CommonModule, ReactiveFormsModule, OutcomeFormComponent, RouterModule], 
   templateUrl: './outcome.component.html',
   styleUrls: ['./outcome.component.css']
 })
@@ -20,6 +20,7 @@ export class OutcomeComponent implements OnInit {
   isModelOpen = false;
   isEditMode = false;
   outcome: _outcome | null = null;
+  totalOutcome: number = 0;
 
   constructor(private outcomeService: OutcomeService, private modalService: ModalService) {}
 
@@ -31,11 +32,15 @@ export class OutcomeComponent implements OnInit {
   }
 
   loadOutcomes() { //loads outcomes
-    this.outcomeService.getOutcomes().subscribe((data: _outcome[]) => this.outcomes = data);
+    this.outcomeService.getOutcomes().subscribe((data: _outcome[]) => {
+      this.outcomes = data;
+      this.totalOutcome = this.calculateTotalOutcome(data);
+    });
   }
 
   openModel() {
     this.isModelOpen = true;
+    this.outcome = null; //resets form when adding new outcome
   }
 
   closeModel() {
@@ -53,5 +58,9 @@ export class OutcomeComponent implements OnInit {
 
   deleteOutcome(id: number) { //deletes outcomes
     this.outcomeService.deleteOutcome(id).subscribe(() => this.loadOutcomes());
+  }
+
+  calculateTotalOutcome(outcomes: _outcome[]): number {
+    return outcomes.reduce((total, outcome) => total + parseFloat(outcome.amount), 0);
   }
 }

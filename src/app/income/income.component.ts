@@ -20,9 +20,10 @@ export class IncomeComponent implements OnInit {
   isModelOpen = false; //model starts closed
   isEditMode = false; //starts in non edit
   income: _income | null = null;
+  totalIncome: number = 0;
 
   constructor(private incomeService: IncomeService, private modalService: ModalService, private router: Router) {
-    
+
   }
   
   goto(route: string) {
@@ -37,11 +38,15 @@ export class IncomeComponent implements OnInit {
   }
 
   loadIncomes() { //loads incomes
-    this.incomeService.getIncomes().subscribe((data: _income[]) => this.incomes = data);
+    this.incomeService.getIncomes().subscribe((data: _income[]) => {
+      this.incomes = data;
+      this.totalIncome = this.calculateTotalIncome(data);
+    });
   }
 
   openModel() {
     this.isModelOpen = true;
+    this.income = null; //form is reset when adding new income
   }
 
   closeModel() { 
@@ -63,5 +68,9 @@ export class IncomeComponent implements OnInit {
         error: (err) => console.error(`Failed to delete income with ID ${id}`, err)
       });
     }
+  }
+
+  calculateTotalIncome(incomes: _income[]): number {
+    return incomes.reduce((total, income) => total + parseFloat(income.amount), 0);
   }
 }

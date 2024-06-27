@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { CompanyService } from '../services/company.service';
+import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
 
 @Component({
   selector: 'app-company-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CurrencyPipe],
   templateUrl: './company-detail.component.html',
   styleUrls: ['./company-detail.component.css']
 })
@@ -15,6 +16,8 @@ export class CompanyDetailComponent implements OnInit {
   companyName: string = '';
   incomes: any[] = []; //store companies incomes
   outcomes: any[] = [];
+  totalIncome: number = 0;
+  totalOutcome: number = 0;
   type: "income" | "outcome" = "income"
 
   constructor(private route: ActivatedRoute, private companyService: CompanyService) { } //routing purposes and accessing company.services
@@ -31,8 +34,10 @@ export class CompanyDetailComponent implements OnInit {
       next: (elements) => {
         if(type == 'income'){
           this.incomes = elements;
+          this.totalIncome = this.incomes.reduce((total, income) => total + income.amount, 0);
         } else {
           this.outcomes = elements;
+          this.totalOutcome = this.outcomes.reduce((total, outcome) => total + outcome.amount, 0);
         }
         
       },
