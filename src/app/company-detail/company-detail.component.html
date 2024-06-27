@@ -50,8 +50,12 @@
             <td colspan="6" class="px-6 py-4 font-bold text-black text-right">Total Outcome:</td>
             <td class="px-6 py-4 text-black font-bold">{{ totalOutcome | currency }}</td>
           </tr>
+          
         </ng-container>
         </tbody>
       </table>
+      <div>
+        <app-bar-chart [data]="type === 'income' ? incomes : outcomes" [label]="type === 'income' ? 'Incomes' : 'Outcomes'"></app-bar-chart>
+      </div>
     </div>
   

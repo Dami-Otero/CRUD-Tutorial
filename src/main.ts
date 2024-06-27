@@ -7,7 +7,7 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
 
-  bootstrapApplication(AppComponent, {
-    providers: [provideCharts(withDefaultRegisterables())],
-  }).catch((err) => console.error(err));
+//  bootstrapApplication(AppComponent, {
+  //  providers: [provideCharts(withDefaultRegisterables())],
+ // }).catch((err) => console.error(err));
   

@@ -21,6 +21,7 @@ export class IncomeFormComponent implements OnChanges {
     this.incomeForm = this.fb.group({ //initialize form and creates validators
       company: [null, [Validators.required]],
       invoice_number: [null, [Validators.required]],
+      invoice_date: [null, Validators.required],
       amount: [null, [Validators.required, Validators.min(0)]],
       due_date: [null, Validators.required],
       is_paid: [null, Validators.required]
@@ -30,9 +31,9 @@ export class IncomeFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isEditMode && this.data) { //onlu if in edit mode and with data
       this.incomeForm.patchValue({
-        id: this.data.id!,
         company: this.data.company,
         invoice_number: this.data.invoice_number,
+        invoice_date: this.data.invoice_date,
         amount: this.data.amount,
         due_date: this.data.due_date,
         is_paid: this.data.is_paid
@@ -42,10 +43,12 @@ export class IncomeFormComponent implements OnChanges {
     }
   }
 
+
   resetForm() { //defualt form
     this.incomeForm.reset({
       company: null,
       invoice_number: null,
+      invoice_date: null,
       amount: null,
       due_date: null,
       is_paid: null

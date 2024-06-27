@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { CompanyService } from '../services/company.service';
 import { ChartOptions, ChartType, ChartDataset } from 'chart.js';
+import { BarChartComponent } from '../bar-chart/bar-chart.component';
 
 @Component({
   selector: 'app-company-detail',
   standalone: true,
-  imports: [CommonModule, CurrencyPipe],
+  imports: [CommonModule, CurrencyPipe, RouterModule, BarChartComponent],
   templateUrl: './company-detail.component.html',
   styleUrls: ['./company-detail.component.css']
 })

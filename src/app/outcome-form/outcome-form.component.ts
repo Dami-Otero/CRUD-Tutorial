@@ -22,6 +22,7 @@ export class OutcomeFormComponent implements OnChanges {
     this.outcomeForm = this.fb.group({ 
       company: [null, [Validators.required]],
       invoice_number: [null, [Validators.required,]], //add all required validators
+      invoice_date: [null, Validators.required],
       amount: [null, [Validators.required, Validators.min(0)]],
       due_date: [null, Validators.required],
       is_paid: [null, Validators.required]

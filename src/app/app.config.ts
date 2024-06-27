@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { RouterModule, provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import {provideCharts, withDefaultRegisterables} from 'ng2-charts';
@@ -14,11 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), //configure router with applications routes
     importProvidersFrom(HttpClientModule), //allows http requests
     provideToastr(), 
-    provideAnimations(), provideCharts()]
+    provideAnimations(), provideCharts(withDefaultRegisterables())]
 };
 
-bootstrapApplication(AppComponent, {
-  providers: [
-  provideCharts(withDefaultRegisterables()),
-  ],
-  }).catch((err) => console.error(err));
+bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
