@@ -58,7 +58,7 @@ export class IncomeComponent implements OnInit {
   loadIncome(data: _income) {
     this.income = data;
     this.isEditMode = true;
-    this.openModel();
+    this.isModelOpen = true;
   }
 
   deleteIncome(id: number) { //deletes income using id

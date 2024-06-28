@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ChartConfiguration, ChartData, ChartEvent } from 'chart.js';
+import { ChartConfiguration, ChartData, ChartEvent, Color } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-bar-chart',
@@ -38,8 +38,22 @@ export class BarChartComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['data'] && this.data) { //checks for changes in data
-      const labels = this.data.map(item => new Date(item.invoice_date).toLocaleString('default', { month: 'short' })); //invoice_date to month for labels
-      const amounts = this.data.map(item => item.amount); //amount values into dataset
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const monthlyIncome: { [key: string]: number } = {}; //stores monthly income
+      for (let i = 0; i < this.data.length; i++) {
+        const item = this.data[i];
+        const date = new Date(item.invoice_date);
+        const month = monthNames[date.getMonth()]; //gets month name from date
+
+        if (!monthlyIncome[month]) { //if month doesn't exist
+          monthlyIncome[month] = 0;
+        }
+        monthlyIncome[month] += item.amount; //sums monthly incomes
+      }
+
+      //used for chart data
+      const labels = Object.keys(monthlyIncome); //makes months labels
+      const amounts = Object.values(monthlyIncome);
       this.barChartData.labels = labels; //updates labels in chart data
       this.barChartData.datasets[0].data = amounts; //updates amounts for dataset
       this.barChartData.datasets[0].label = this.label; //updates dataset label

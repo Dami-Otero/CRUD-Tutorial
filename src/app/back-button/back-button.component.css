@@ -1,0 +1,15 @@
+.back-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon {
+    color: #6c63ff; /* Customize the color as needed */
+    width: 24px;
+    height: 24px;
+  }
+  

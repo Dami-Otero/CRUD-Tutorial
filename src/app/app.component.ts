@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterOutlet, Router, RouterLink, RouterLinkActive, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, RoutesRecognized, RouteConfigLoadStart, RouteConfigLoadEnd, ChildActivationStart, ChildActivationEnd } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { BackButtonComponent } from './back-button/back-button.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, RouterLink, RouterLinkActive, RouterModule],
+  imports: [RouterOutlet, NavbarComponent, RouterLink, RouterLinkActive, RouterModule, BackButtonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
