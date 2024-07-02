@@ -1,6 +1,6 @@
 <div class="container mx-auto px-4 py-8">
     <div class="flex justify-center mb-4">
-      <h2 class="text-2xl font-bold">Recap</h2>
+    <h5 class="mb-5 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">Recap</h5>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div class="p-4 bg-white shadow rounded-lg">
@@ -16,4 +16,16 @@
         <p class="text-2xl font-bold">{{ numberOfCompanies }}</p>
       </div>
     </div>
-</div>
+
+    <div class="mt-8">
+      <h3 class="text-xl font-bold mb-4">Incomes</h3>
+      <app-bar-chart [data]="incomes" label="Income"></app-bar-chart>
+    </div>
+    <div class="mt-8">
+      <h3 class="text-xl font-bold mb-4">Outcomes</h3>
+      <app-bar-chart [data]="outcomes" label="Outcome"></app-bar-chart>
+
+    </div>
+    <app-income-form *ngIf="isIncomeModalOpen" [isEditMode]="isEditMode" [data]="income" (onCloseModel)="closeIncomeModal()"></app-income-form>
+    <app-outcome-form *ngIf="isOutcomeModalOpen" [isEditMode]="isEditMode" [data]="outcome" (onCloseModel)="closeOutcomeModal()"></app-outcome-form>
+  </div>
