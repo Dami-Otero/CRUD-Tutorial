@@ -3,11 +3,12 @@ import { RouterOutlet, Router, RouterLink, RouterLinkActive, NavigationStart, Na
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { BackButtonComponent } from './back-button/back-button.component';
+import { DUIPaginator } from "david-ui-angular";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, RouterLink, RouterLinkActive, RouterModule, BackButtonComponent],
+  imports: [RouterOutlet, NavbarComponent, RouterLink, RouterLinkActive, RouterModule, BackButtonComponent, DUIPaginator],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

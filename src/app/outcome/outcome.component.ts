@@ -40,8 +40,10 @@ export class OutcomeComponent implements OnInit {
 
   openModel() {
     this.isModelOpen = true;
-    this.outcome = null; //resets form when adding new outcome
+    if (!this.isEditMode) {
+      this.outcome = null; //resets form when adding new outcome
   }
+}
 
   closeModel() {
     this.isModelOpen = false;

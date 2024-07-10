@@ -8,17 +8,19 @@ import { BarChartComponent } from "../bar-chart/bar-chart.component";
 import { ModalService } from '../services/modal.service';
 import { IncomeFormComponent } from '../income-form/income-form.component';
 import { OutcomeFormComponent } from '../outcome-form/outcome-form.component';
+import { LineChartComponent } from "../line-chart/line-chart.component";
 
 @Component({
   selector: 'app-recap',
   standalone: true,
-  imports: [CommonModule, BarChartComponent, IncomeFormComponent, OutcomeFormComponent],
+  imports: [CommonModule, BarChartComponent, IncomeFormComponent, OutcomeFormComponent, LineChartComponent],
   templateUrl: './recap.component.html',
   styleUrl: './recap.component.css'
 })
 export class RecapComponent implements OnInit {
   incomes: _income[] = [];
   outcomes: _outcome[] = [];
+  combinedData: any[] = [];
   totalIncome: number = 0;
   totalOutcome: number = 0;
   numberOfCompanies: number = 0;
@@ -31,7 +33,7 @@ export class RecapComponent implements OnInit {
   constructor(private incomeService: IncomeService, private outcomeService: OutcomeService, private modalService: ModalService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadIncomes();
     this.loadOutcomes();
 
@@ -39,19 +41,21 @@ export class RecapComponent implements OnInit {
     this.modalService.openOutcomeModal$.subscribe(() => this.openOutcomeModal()); //used to open outcome modals
   }
 
-  loadIncomes(): void {
+  loadIncomes() {
     this.incomeService.getIncomes().subscribe((data: _income[]) => {
       this.incomes = data;
       this.totalIncome = this.calculateTotalIncome(data); //stores total income
       this.calculateNumberOfCompanies(); //used to calculate number of companies
+      this.updateCombinedData();
     });
   }
 
-  loadOutcomes(): void {
+  loadOutcomes() {
     this.outcomeService.getOutcomes().subscribe((data: _outcome[]) => {
       this.outcomes = data;
       this.totalOutcome = this.calculateTotalOutcome(data);
       this.calculateNumberOfCompanies();
+      this.updateCombinedData();
     });
   }
 
@@ -74,24 +78,31 @@ export class RecapComponent implements OnInit {
     this.numberOfCompanies = companies.size; //total number of unique companies
   }
 
-  openIncomeModal(): void { //opens income modal
+  updateCombinedData() {
+    this.combinedData = [
+      ...this.incomes.map(income => ({ ...income, type: 'income' })),
+      ...this.outcomes.map(outcome => ({ ...outcome, type: 'outcome' }))
+    ];
+  }
+
+  openIncomeModal() { //opens income modal
     this.isIncomeModalOpen = true;
     this.income = null;
     this.isEditMode = false;
   }
 
-  openOutcomeModal(): void { //opens outcome modal
+  openOutcomeModal() { //opens outcome modal
     this.isOutcomeModalOpen = true;
     this.outcome = null;
     this.isEditMode = false;
   }
 
-  closeIncomeModal(): void { //closes income modal
+  closeIncomeModal() { //closes income modal
     this.isIncomeModalOpen = false;
     this.loadIncomes();
   }
 
-  closeOutcomeModal(): void { //closes outcome modal
+  closeOutcomeModal() { //closes outcome modal
     this.isOutcomeModalOpen = false;
     this.loadOutcomes();
   }

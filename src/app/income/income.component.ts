@@ -7,11 +7,12 @@ import { IncomeService } from '../services/income.service';
 import { IncomeFormComponent } from '../income-form/income-form.component'; 
 import { ModalService } from '../services/modal.service';
 import { Router, RouterModule } from '@angular/router';
+import { DUIPaginator } from 'david-ui-angular';
 
 @Component({
   selector: 'app-income',
   standalone: true,
-  imports: [ModelComponent, CommonModule, IncomeFormComponent, RouterModule], 
+  imports: [ModelComponent, CommonModule, IncomeFormComponent, RouterModule, DUIPaginator], 
   templateUrl: './income.component.html',
   styleUrls: ['./income.component.css']
 })

@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { OutcomeService } from '../services/outcome.service';
 import { _outcome } from '../pages/shared/models/Outcome';
 import { CommonModule } from '@angular/common';
-import { IncomeComponent } from '../income/income.component';
 
 @Component({
   selector: 'app-outcome-form',
@@ -32,7 +31,6 @@ export class OutcomeFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (this.isEditMode && this.data) { //adds data if in edit mode and data exists
       this.outcomeForm.patchValue({
-        id: this.data.id,
         company: this.data.company,
         invoice_number: this.data.invoice_number,
         invoice_date: this.data.invoice_date,
