@@ -35,7 +35,6 @@
   
     <div class="mt-8 w-full max-w-4xl">
       <h3 class="text-xl font-bold mb-4 text-center">Income vs Outcome Trend</h3>
-      <h3 class="text-center mb-4">(Based on due date)</h3>
       <app-line-chart [incomeData]="incomes" [outcomeData]="outcomes" label="Income vs Outcome"></app-line-chart>
     </div>
     <app-income-form *ngIf="isIncomeModalOpen" [isEditMode]="isEditMode" [data]="income" (onCloseModel)="closeIncomeModal()"></app-income-form>

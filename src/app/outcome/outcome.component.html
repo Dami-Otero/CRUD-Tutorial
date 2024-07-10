@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let outcome of outcomes" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <tr *ngFor="let outcome of outcomes | slice: (curPage - 1) * pageSize : curPage * pageSize" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
           <td class="px-6 py-4">{{ outcome.id }}</td>
           <td class="px-6 py-4">
             <a [routerLink]="['/outcome', outcome.company]" class="text-blue-600 hover:underline">{{ outcome.company }}</a>
@@ -38,5 +38,10 @@
       </tr>
       </tbody>
     </table>
+      <div class="flex justify-between items-center mt-4">
+        <button [disabled]="curPage == 1" (click)="curPage = curPage - 1" class="px-4 py-2 bg-gray-300 rounded">Prev</button>
+        <span>Page {{curPage}} of {{ numberOfPages() }}</span>
+        <button [disabled]="curPage >= numberOfPages()" (click)="curPage = curPage + 1" class="px-4 py-2 bg-gray-300 rounded">Next</button>
+      </div>
     <app-outcome-form *ngIf="isModelOpen" [isEditMode]="isEditMode" [data]="outcome" (onCloseModel)="closeModel()"></app-outcome-form>
   </div>

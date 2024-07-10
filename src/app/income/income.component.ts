@@ -22,11 +22,13 @@ export class IncomeComponent implements OnInit {
   isEditMode = false; //starts in non edit
   income: _income | null = null;
   totalIncome: number = 0;
+  curPage: number = 1;
+  pageSize: number = 10;
 
   constructor(private incomeService: IncomeService, private modalService: ModalService, private router: Router) {
 
   }
-  
+
   goto(route: string) {
     this.router.navigate([route]);
   }
@@ -73,5 +75,9 @@ export class IncomeComponent implements OnInit {
 
   calculateTotalIncome(incomes: _income[]): number {
     return incomes.reduce((total, income) => total + parseFloat(income.amount), 0);
+  }
+
+  numberOfPages(): number { //calculates number of pages needed
+    return Math.ceil(this.incomes.length / this.pageSize);
   }
 }

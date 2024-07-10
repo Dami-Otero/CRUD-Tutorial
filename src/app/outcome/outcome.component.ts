@@ -21,6 +21,8 @@ export class OutcomeComponent implements OnInit {
   isEditMode = false;
   outcome: _outcome | null = null;
   totalOutcome: number = 0;
+  curPage: number = 1;
+  pageSize: number = 10;
 
   constructor(private outcomeService: OutcomeService, private modalService: ModalService) {}
 
@@ -64,5 +66,8 @@ export class OutcomeComponent implements OnInit {
 
   calculateTotalOutcome(outcomes: _outcome[]): number {
     return outcomes.reduce((total, outcome) => total + parseFloat(outcome.amount), 0);
+  }
+  numberOfPages(): number { //calculates number of pages
+    return Math.ceil(this.outcomes.length / this.pageSize);
   }
 }
