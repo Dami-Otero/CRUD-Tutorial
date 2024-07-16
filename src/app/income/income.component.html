@@ -1,47 +1,52 @@
-<div class="relative container mx-auto px-4">
-  <div class="flex justify-center">
-    <h5 class="mb-5 text-lg font-bold tracking-tight text-gray-900 dark:text-black">Income Details</h5>
+<div class="container mx-auto px-4 py-8 flex flex-col items-center justify-center">
+  <div class="flex justify-center mb-4">
+    <h5 class="mb-5 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">Income Details</h5>
   </div>
-    <table class="w-full max-w-4xl mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th scope="col" class="px-6 py-3">ID</th>
-          <th scope="col" class="px-6 py-3">Company</th>
-          <th scope="col" class="px-6 py-3">Invoice Number</th>
-          <th scope="col" class="px-6 py-3">Invoice Date</th>
-          <th scope="col" class="px-6 py-3">Amount</th>
-          <th scope="col" class="px-6 py-3">Due Date</th>
-          <th scope="col" class="px-6 py-3">Is Paid</th>
-          <th scope="col" class="px-6 py-3">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let income of incomes | slice: (curPage - 1) * pageSize : curPage * pageSize" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-          <td class="px-6 py-4">{{ income.id }}</td>
-          <td class="px-6 py-4">
-            <a [routerLink]="['/income', income.company]" class="text-blue-600 hover:underline">{{ income.company }}</a>
-          </td>
-          <td class="px-6 py-4">{{ income.invoice_number }}</td>
-          <td class="px-6 py-4">{{ income.invoice_date | date:'dd/MM/yyyy'}}</td>
-          <td class="px-6 py-4">{{ income.amount | currency }}</td>
-          <td class="px-6 py-4">{{ income.due_date | date:'dd/MM/yyyy'}}</td>
-          <td class="px-6 py-4">{{ income.is_paid === 'true' ? 'Yes' : 'No' }}</td>
-          <td class="px-6 py-4">
-            <button (click)="loadIncome(income)" class="text-blue-600 hover:underline">Edit</button>
-            <button (click)="deleteIncome(income.id!)" class="text-red-600 hover:underline">Delete</button>
-          </td>
-        </tr>
+  <div class="income-summary flex justify-center gap-4 w-full max-w-4xl">
+    <div class="p-4 bg-white shadow rounded-lg text-center">
+      <h3 class="text-lg font-semibold mb-2">Page's Total Income</h3>
+      <p class="text-2xl font-bold">{{ visibleTotalIncome | currency }}</p>
+    </div>
+    <div class="p-4 bg-white shadow rounded-lg text-center">
+      <h3 class="text-lg font-semibold mb-2">Total Income</h3>
+      <p class="text-2xl font-bold">{{ totalIncome | currency }}</p>
+    </div>
+  </div>
+  <table class="w-full max-w-4xl mx-auto text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
       <tr>
-        <td colspan="6" class="px-6 py-4 text-black font-bold text-right">Total Income:</td>
-        <td class="px-6 py-4 text-black font-bold">{{ totalIncome | currency }}</td>
-        <td></td>
+        <th scope="col" class="px-6 py-3">ID</th>
+        <th scope="col" class="px-6 py-3">Company</th>
+        <th scope="col" class="px-6 py-3">Invoice Number</th>
+        <th scope="col" class="px-6 py-3">Invoice Date</th>
+        <th scope="col" class="px-6 py-3">Amount</th>
+        <th scope="col" class="px-6 py-3">Due Date</th>
+        <th scope="col" class="px-6 py-3">Is Paid</th>
+        <th scope="col" class="px-6 py-3">Actions</th>
       </tr>
-      </tbody>
-    </table>
-      <div class="flex justify-between items-center mt-4">
-        <button [disabled]="curPage == 1" (click)="curPage = curPage - 1" class="px-4 py-2 bg-gray-300 rounded">Prev</button>
-        <span>Page {{curPage}} of {{ numberOfPages() }}</span>
-        <button [disabled]="curPage >= numberOfPages()" (click)="curPage = curPage + 1" class="px-4 py-2 bg-gray-300 rounded">Next</button>
-      </div>
-    <app-income-form *ngIf="isModelOpen" [isEditMode]="isEditMode" [data]="income" (onCloseModel)="closeModel()"></app-income-form>
+    </thead>
+    <tbody>
+      <tr *ngFor="let income of incomes | slice: (curPage - 1) * pageSize : curPage * pageSize" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <td class="px-6 py-4">{{ income.id }}</td>
+        <td class="px-6 py-4">
+          <a [routerLink]="['/income', income.company]" class="text-blue-600 hover:underline">{{ income.company }}</a>
+        </td>
+        <td class="px-6 py-4">{{ income.invoice_number }}</td>
+        <td class="px-6 py-4">{{ income.invoice_date | date:'dd/MM/yyyy'}}</td>
+        <td class="px-6 py-4">{{ income.amount | currency }}</td>
+        <td class="px-6 py-4">{{ income.due_date | date:'dd/MM/yyyy'}}</td>
+        <td class="px-6 py-4">{{ income.is_paid === 'true' ? 'Yes' : 'No' }}</td>
+        <td class="px-6 py-4">
+          <button (click)="loadIncome(income)" class="text-blue-600 hover:underline">Edit</button>
+          <button (click)="deleteIncome(income.id!)" class="text-red-600 hover:underline">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="flex justify-between items-center mt-4">
+    <button [disabled]="curPage == 1" (click)="curPage = curPage - 1; onPageChange()" class="px-4 py-2 bg-gray-300 rounded">Prev</button>
+    <span>Page {{curPage}} of {{ numberOfPages() }}</span>
+    <button [disabled]="curPage >= numberOfPages()" (click)="curPage = curPage + 1; onPageChange()" class="px-4 py-2 bg-gray-300 rounded">Next</button>
   </div>
+  <app-income-form *ngIf="isModelOpen" [isEditMode]="isEditMode" [data]="income" (onCloseModel)="closeModel()"></app-income-form>
+</div>

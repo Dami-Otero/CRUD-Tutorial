@@ -21,6 +21,7 @@ export class OutcomeComponent implements OnInit {
   isEditMode = false;
   outcome: _outcome | null = null;
   totalOutcome: number = 0;
+  visibleTotalOutcome: number = 0; //total outcome visible data
   curPage: number = 1;
   pageSize: number = 10;
 
@@ -37,6 +38,7 @@ export class OutcomeComponent implements OnInit {
     this.outcomeService.getOutcomes().subscribe((data: _outcome[]) => {
       this.outcomes = data;
       this.totalOutcome = this.calculateTotalOutcome(data);
+      this.updateVisibleTotalOutcome(); //calculates visible total outcome
     });
   }
 
@@ -44,8 +46,8 @@ export class OutcomeComponent implements OnInit {
     this.isModelOpen = true;
     if (!this.isEditMode) {
       this.outcome = null; //resets form when adding new outcome
+    }
   }
-}
 
   closeModel() {
     this.isModelOpen = false;
@@ -67,7 +69,19 @@ export class OutcomeComponent implements OnInit {
   calculateTotalOutcome(outcomes: _outcome[]): number {
     return outcomes.reduce((total, outcome) => total + parseFloat(outcome.amount), 0);
   }
-  numberOfPages(): number { //calculates number of pages
+
+  updateVisibleTotalOutcome() {
+    const start = (this.curPage - 1) * this.pageSize;
+    const end = this.curPage * this.pageSize;
+    const visibleOutcomes = this.outcomes.slice(start, end);
+    this.visibleTotalOutcome = visibleOutcomes.reduce((total, outcome) => total + parseFloat(outcome.amount), 0);
+  }
+
+  numberOfPages(): number { // calculates number of pages
     return Math.ceil(this.outcomes.length / this.pageSize);
+  }
+
+  onPageChange() {
+    this.updateVisibleTotalOutcome();
   }
 }

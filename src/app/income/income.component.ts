@@ -22,6 +22,7 @@ export class IncomeComponent implements OnInit {
   isEditMode = false; //starts in non edit
   income: _income | null = null;
   totalIncome: number = 0;
+  visibleTotalIncome: number = 0; //total income of the visible data
   curPage: number = 1;
   pageSize: number = 10;
 
@@ -44,6 +45,7 @@ export class IncomeComponent implements OnInit {
     this.incomeService.getIncomes().subscribe((data: _income[]) => {
       this.incomes = data;
       this.totalIncome = this.calculateTotalIncome(data);
+      this.updateVisibleTotalIncome(); //calculate  visible total income
     });
   }
 
@@ -77,7 +79,17 @@ export class IncomeComponent implements OnInit {
     return incomes.reduce((total, income) => total + parseFloat(income.amount), 0);
   }
 
+  updateVisibleTotalIncome() {
+    const start = (this.curPage - 1) * this.pageSize;
+    const end = this.curPage * this.pageSize;
+    const visibleIncomes = this.incomes.slice(start, end);
+    this.visibleTotalIncome = visibleIncomes.reduce((total, income) => total + parseFloat(income.amount), 0);
+  }
+
   numberOfPages(): number { //calculates number of pages needed
     return Math.ceil(this.incomes.length / this.pageSize);
+  }
+  onPageChange() {
+    this.updateVisibleTotalIncome();
   }
 }

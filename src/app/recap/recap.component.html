@@ -12,8 +12,36 @@
         <p class="text-2xl font-bold">{{ totalOutcome | currency }}</p>
       </div>
       <div class="p-4 bg-white shadow rounded-lg text-center">
-        <h3 class="text-lg font-semibold mb-2">Number of Companies</h3>
-        <p class="text-2xl font-bold">{{ numberOfCompanies }}</p>
+        <h3 class="text-lg font-semibold mb-2">Number of Clients</h3>
+        <p class="text-2xl font-bold">{{ numberOfClients }}</p>
+      </div>
+      <div class="p-4 bg-white shadow rounded-lg text-center">
+        <h3 class="text-lg font-semibold mb-2">Number of Suppliers</h3>
+        <p class="text-2xl font-bold">{{ numberOfSuppliers }}</p>
+      </div>
+      <div class="p-4 bg-white shadow rounded-lg text-center">
+        <h3 class="text-lg font-semibold mb-2">Avg Income per Client</h3>
+        <p class="text-2xl font-bold">{{ totalIncome / numberOfClients | currency }}</p>
+      </div>
+      <div class="p-4 bg-white shadow rounded-lg text-center">
+        <h3 class="text-lg font-semibold mb-2">Avg Outcome per Supplier</h3>
+        <p class="text-2xl font-bold">{{ totalOutcome / numberOfSuppliers | currency }}</p>
+      </div>
+      <div class="p-4 bg-white shadow rounded-lg text-center">
+        <h3 class="text-lg font-semibold mb-2">Largest Income</h3>
+        <p class="text-2xl font-bold">{{ getLargestIncome()?.amount | currency }}</p>
+        <p class="text-sm">{{ getLargestIncome()?.company }}</p>
+      </div>
+      <div class="p-4 bg-white shadow rounded-lg text-center">
+        <h3 class="text-lg font-semibold mb-2">Gross Margin</h3>
+        <p class="text-2xl font-bold" [ngClass]="{'text-green-500': grossMargin >= 0, 'text-red-500': grossMargin < 0}">
+          {{ grossMargin | number:'1.2-2' }}%
+        </p>
+      </div>
+      <div class="p-4 bg-white shadow rounded-lg text-center">
+        <h3 class="text-lg font-semibold mb-2">Largest Outcome</h3>
+        <p class="text-2xl font-bold">{{ getLargestOutcome()?.amount | currency }}</p>
+        <p class="text-sm">{{ getLargestOutcome()?.company }}</p>
       </div>
     </div>
   
@@ -35,8 +63,14 @@
   
     <div class="mt-8 w-full max-w-4xl">
       <h3 class="text-xl font-bold mb-4 text-center">Income vs Outcome Trend</h3>
-      <app-line-chart [incomeData]="incomes" [outcomeData]="outcomes" label="Income vs Outcome"></app-line-chart>
+      <app-line-chart [incomeData]="incomes" [outcomeData]="outcomes" label="Income vs Outcome" chartType="incomeVsOutcome"></app-line-chart>
     </div>
+
+  <div class="mt-8 w-full max-w-4xl">
+    <h3 class="text-xl font-bold mb-4 text-center">Gross Margin</h3>
+    <app-gross-margin-bar-chart [incomes]="incomes" [outcomes]="outcomes"></app-gross-margin-bar-chart>
+  </div>
+
     <app-income-form *ngIf="isIncomeModalOpen" [isEditMode]="isEditMode" [data]="income" (onCloseModel)="closeIncomeModal()"></app-income-form>
     <app-outcome-form *ngIf="isOutcomeModalOpen" [isEditMode]="isEditMode" [data]="outcome" (onCloseModel)="closeOutcomeModal()"></app-outcome-form>
   </div>

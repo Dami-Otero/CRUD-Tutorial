@@ -18,7 +18,7 @@ export class BarChartComponent implements OnChanges {
     responsive: true, //makes chart responsive
     scales: {
       x: {},
-      y: { 
+      y: {
         min: 0, //must be at least 0 since its income/outcome
       },
     },
@@ -41,15 +41,15 @@ export class BarChartComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['data'] && this.data) { //checks for changes in data
       if (this.type === 'combined') {
-        this.groupDataByDueDate(); //groups data by due date for combined chart
-      } else {
+        this.groupDataByInvoiceDateCombined();
+      }  else {
         this.groupDataByInvoiceDate(); //groups data by invoice date for income/outcome chart
       }
       this.chart?.update();
     }
   }
 
-  private groupDataByInvoiceDate() {
+  private groupDataByInvoiceDate(): void {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const monthlyData = monthNames.reduce((acc, month) => {
       acc[month] = 0; //0 for january
@@ -66,19 +66,22 @@ export class BarChartComponent implements OnChanges {
     const amounts = labels.map(label => monthlyData[label]);
 
     this.barChartData.labels = labels;
-    this.barChartData.datasets = [{
-      data: amounts,
-      label: this.label,
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)',
-        'rgba(99, 255, 132, 0.2)', 'rgba(162, 54, 235, 0.2)', 'rgba(206, 255, 86, 0.2)',
-        'rgba(192, 75, 192, 0.2)', 'rgba(102, 153, 255, 0.2)', 'rgba(159, 255, 64, 0.2)'
-      ] //new color each month
-    }];
+    if (this.type === 'income') {
+      this.barChartData.datasets = [{
+        data: amounts,
+        label: 'Income',
+        backgroundColor: 'rgba(0, 123, 255, 0.4)'
+      }];
+    } else if (this.type === 'outcome') {
+      this.barChartData.datasets = [{
+        data: amounts,
+        label: 'Outcome',
+        backgroundColor: 'rgba(255, 99, 132, 0.4)'
+      }];
+    }
   }
 
-  private groupDataByDueDate() {
+  private groupDataByInvoiceDateCombined() {
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const monthlyData = monthNames.reduce((acc, month) => {
       acc[month] = { income: 0, outcome: 0 }; //starts as 0 for income/outcome
@@ -86,7 +89,7 @@ export class BarChartComponent implements OnChanges {
     }, {} as { [key: string]: { income: number, outcome: number } });
 
     for (const item of this.data) {
-      const date = new Date(item.due_date); //uses due date
+      const date = new Date(item.invoice_date);//uses invoice date
       const month = monthNames[date.getMonth()];
 
       if (item.type === 'income') {
@@ -101,8 +104,18 @@ export class BarChartComponent implements OnChanges {
     const outcomeAmounts = labels.map(label => monthlyData[label].outcome); //orders outcome amounts
 
     this.barChartData.labels = labels;
-    this.barChartData.datasets[0].data = incomeAmounts;
-    this.barChartData.datasets[1].data = outcomeAmounts;
+    this.barChartData.datasets = [
+      {
+        data: incomeAmounts,
+        label: 'Income',
+        backgroundColor: 'rgba(0, 123, 255, 0.4)'
+      },
+      {
+        data: outcomeAmounts,
+        label: 'Outcome',
+        backgroundColor: 'rgba(255, 99, 132, 0.4)'
+      }
+    ];
   }
 
   public chartClicked({event,active,}: {event?: ChartEvent;active?: object[] }) { //deals with chart clicking events
